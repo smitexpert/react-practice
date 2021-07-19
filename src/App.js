@@ -32,16 +32,11 @@ class App extends Component {
           name: 'Contact',
           url: '/contact'
         }
-      ],
-      posts: []
+      ]
     }
   }
 
-  componentDidMount(){
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(posts => this.setState({ posts: posts }))
-  }
+
 
   render() {
     return (
@@ -50,15 +45,9 @@ class App extends Component {
           <SiteHeader navigation={this.state.navigation} />
 
           <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/blog" exact>
-              <Blog posts={this.state.posts} />
-            </Route>
-            <Route path={"/blog/:blogId"}>
-                <BlogDetails />
-            </Route>
+            <Route path="/" component={Home} exact />
+            <Route path="/blog" component={Blog} exact />
+            <Route exact path={"/blog/:blogId"} component={BlogDetails} />
           </Switch>
         </div>
       </BrowserRouter>
